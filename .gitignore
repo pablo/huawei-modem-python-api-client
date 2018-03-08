@@ -1,3 +1,5 @@
 .idea
 venv
 gw.py
+
+*.csv
