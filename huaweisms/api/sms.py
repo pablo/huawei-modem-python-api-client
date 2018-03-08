@@ -5,17 +5,17 @@ from huaweisms.api.common import post_to_url, ApiCtx, get_from_url
 from .config import API_URL
 
 
-def get_sms(ctx: ApiCtx, page: int = 1, qty: int = 1):
+def get_sms(ctx: ApiCtx, box_type: int = 1, page: int = 1, qty: int = 1):
     xml_data = """
         <request>
             <PageIndex>{}</PageIndex>
             <ReadCount>{}</ReadCount>
-            <BoxType>1</BoxType>
+            <BoxType>{}</BoxType>
             <SortType>0</SortType>
             <Ascending>0</Ascending>
             <UnreadPreferred>1</UnreadPreferred>
         </request>    
-    """.format(page, qty)
+    """.format(page, qty, box_type)
     tok = ctx.tokens.pop()
 
     headers = {
