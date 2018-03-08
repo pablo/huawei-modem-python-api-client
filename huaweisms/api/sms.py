@@ -25,6 +25,12 @@ def get_sms(ctx: ApiCtx, box_type: int = 1, page: int = 1, qty: int = 1):
     url = "{}/sms/sms-list".format(API_URL)
     r = post_to_url(url, xml_data, ctx, headers)
 
+    if r['type'] == 'response':
+        if type(r['response']['Messages']['Message']) == dict:
+            m = r['response']['Messages']['Message']
+            r['response']['Messages']['Message'] = []
+            r['response']['Messages']['Message'].append(m)
+
     return r
 
 

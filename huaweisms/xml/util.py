@@ -40,8 +40,10 @@ def get_dictionary_from_children(elem: Element):
             #if
             if ret[n] == None:
                 ret[n] = get_dictionary_from_children(node)
-            else:
+            elif type(ret[n]) == list:
                 ret[n].append(get_dictionary_from_children(node))
+            else:
+                ret[n] = get_dictionary_from_children(node)
 
     if len(ret) == 0:
         ret = get_element_text(elem)
