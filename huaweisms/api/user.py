@@ -4,7 +4,7 @@ import hashlib
 
 import binascii
 
-from huaweisms.api.common import common_headers, ApiCtx, post_to_url
+from huaweisms.api.common import common_headers, ApiCtx, post_to_url, get_from_url
 from .config import API_URL
 
 
@@ -52,4 +52,8 @@ def login(ctx: ApiCtx, user_name: str, password: str):
         ctx.logged_in = True
 
     return r
+
+def state_login(ctx: ApiCtx):
+    url = "{}/user/state-login".format(API_URL)
+    return get_from_url(url, ctx)
 
