@@ -3,3 +3,5 @@ venv
 gw.py
 
 *.csv
+
+initial_skip
