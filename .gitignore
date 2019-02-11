@@ -6,3 +6,6 @@ gw.py
 *.pyc
 
 initial_skip
+
+dist/*
+*.egg-info
