@@ -6,6 +6,7 @@ This is a python lib to interact with Modem USB Huawei HTTP API. I tested it wit
 
 * E5180
 * E8372
+* B315
 
 Please let me know if you tested it successfully with other modems as well.
 
@@ -24,6 +25,8 @@ Please let me know if you tested it successfully with other modems as well.
    * status: get status of ussd. This will tell you if there are ussd messages available to read
    * send: sends a ussd message
    * get: retrieves a ussd message
+* wlan:
+    * host-list: gets a list of connected devices
 
 ### Prerequisites
 
