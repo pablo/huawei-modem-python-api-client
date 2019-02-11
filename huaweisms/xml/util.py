@@ -5,6 +5,7 @@ from xml.dom.minidom import Element, Document
 def get_element_text(elem: Element) -> str:
     return " ".join(t.nodeValue for t in elem.childNodes if t.nodeType == t.TEXT_NODE)
 
+
 def get_child_text(elem: Element, nodeName: str) -> str:
     children = elem.getElementsByTagName(nodeName)
     if len(children) > 0:
@@ -29,6 +30,7 @@ def elements_dictionary(elem: Element) -> dict:
             ret[k] = None
 
     return ret
+
 
 def get_dictionary_from_children(elem: Element):
 

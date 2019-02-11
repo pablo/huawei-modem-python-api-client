@@ -1,5 +1,4 @@
 from datetime import datetime
-from time import strptime, strftime
 
 from huaweisms.api.common import post_to_url, ApiCtx, get_from_url
 from .config import API_URL

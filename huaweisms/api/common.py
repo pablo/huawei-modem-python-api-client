@@ -1,4 +1,3 @@
-from pprint import pprint
 from xml.dom.minidom import Element
 
 import requests
@@ -74,6 +73,7 @@ def check_response_headers(resp, ctx: ApiCtx):
     if 'SessionID' in resp.cookies:
         ctx.session_id = resp.cookies['SessionID']
 
+
 def post_to_url(url: str, data: str, ctx: ApiCtx = None, additional_headers: dict = None) -> dict:
     headers = common_headers()
 
@@ -91,7 +91,6 @@ def post_to_url(url: str, data: str, ctx: ApiCtx = None, additional_headers: dic
     check_response_headers(r, ctx)
 
     return api_response(r)
-
 
 
 def get_from_url(url: str, ctx: ApiCtx = None, additional_headers: dict = None) -> dict:
