@@ -21,7 +21,9 @@ setup_args = {
     'author': 'Pablo Santa Cruz, Mkhanyisi Madlavana',
     'author_email': 'pablo@github.com, mkhanyisi@gmail.com',
     'url': 'https://github.com/pablo/huawei-modem-python-api-client',
-    'download_url': 'https://github.com/pablo/huawei-modem-python-api-client/tarball/{0}'.format(version),
+    'download_url': 'https://github.com/pablo/huawei-modem-python-api-client/tarball/{0}'.format(
+        version
+    ),
     'package_dir': {'huaweisms': 'huaweisms'},
     'description': 'huaweisms is a python api client for Huawei Modems.',
     'long_description': long_description,
@@ -37,7 +39,6 @@ setup_args = {
         'Development Status :: {0}'.format(dev_status),
         'Intended Audience :: End Users/Desktop',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
