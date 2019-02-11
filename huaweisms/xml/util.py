@@ -39,10 +39,9 @@ def get_dictionary_from_children(elem: Element):
     for node in elem.childNodes:
         if node.nodeType == node.ELEMENT_NODE:
             n = node.nodeName
-            #if
-            if ret[n] == None:
+            if ret[n] is None:
                 ret[n] = get_dictionary_from_children(node)
-            elif type(ret[n]) == list:
+            elif isinstance(ret[n], list):
                 ret[n].append(get_dictionary_from_children(node))
             else:
                 ret[n] = get_dictionary_from_children(node)
@@ -51,6 +50,7 @@ def get_dictionary_from_children(elem: Element):
         ret = get_element_text(elem)
 
     return ret
+
 
 def parse_xml_string(xmlString: str) -> Document:
     return minidom.parseString(xmlString)
