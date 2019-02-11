@@ -38,7 +38,31 @@ requests==2.0.0
 
 ### Installing
 
-Todo: make it a `pip install` option for this package.
+```bash
+pip install huawei-modem-api-client
+```
+
+### Example
+```python
+import huaweisms.api.user
+import huaweisms.api.wlan
+import huaweisms.api.sms
+
+ctx = huaweisms.api.user.quick_login("myusername", "mypassword")
+print(ctx)
+# output: <ApiCtx online>
+
+# sending sms
+huaweisms.api.sms.send_sms(
+    ctx,
+    'phone-number',
+    'this is the sms message'
+)
+
+# connected devices
+device_list = huaweisms.api.wlan.get_connected_hosts(ctx)
+
+```
 
 ## Built With
 

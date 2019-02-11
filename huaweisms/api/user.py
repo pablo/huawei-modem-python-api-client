@@ -4,8 +4,11 @@ import hashlib
 
 import binascii
 
+import json
+
+import huaweisms.api.webserver
+from huaweisms.api.config import API_URL
 from huaweisms.api.common import common_headers, ApiCtx, post_to_url, get_from_url
-from .config import API_URL
 
 
 def b64_sha256(data: str) -> str:
@@ -16,20 +19,20 @@ def b64_sha256(data: str) -> str:
     return base64.urlsafe_b64encode(hs256).decode('utf-8', 'ignore')
 
 
+def quick_login(username: str, password: str):
+    ctx = ApiCtx()
+    token = huaweisms.api.webserver.SesTokInfo()
+    ctx.session_id = token['response']['SesInfo'].split("=")[1]
+    ctx.token = token['response']['TokInfo']
+    response = login(ctx, username, password)
+    if not ctx.logged_in:
+        raise ValueError(json.dumps(response))
+    return ctx
+
+
 def login(ctx: ApiCtx, user_name: str, password: str):
     headers = common_headers()
     url = "{}/user/login".format(API_URL)
-
-#   original JS code:
-#   psd = base64encode(
-#    SHA256(
-#        name +
-#        base64encode(
-#                       SHA256($('#password').val())
-#        ) +
-#        g_requestVerificationToken[0]
-#    )
-#   );
 
     password_value = b64_sha256(user_name + b64_sha256(password) + ctx.token)
 
@@ -52,6 +55,7 @@ def login(ctx: ApiCtx, user_name: str, password: str):
         ctx.logged_in = True
 
     return r
+
 
 def state_login(ctx: ApiCtx):
     url = "{}/user/state-login".format(API_URL)

@@ -14,6 +14,18 @@ class ApiCtx(object):
         self.token = None
         self.tokens = []
 
+    def __unicode__(self):
+        return '<{} {}>'.format(
+            self.__class__.__name__,
+            'online' if self.logged_in else 'offline'
+        )
+
+    def __repr__(self):
+        return self.__unicode__()
+
+    def __str__(self):
+        return self.__unicode__()
+
 
 def common_headers():
     return {
