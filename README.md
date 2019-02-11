@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dopstar/huawei-modem-python-api-client.svg?branch=master)](https://travis-ci.org/dopstar/huawei-modem-python-api-client) [![Python Version](https://img.shields.io/pypi/pyversions/huawei-modem-python-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-python-api-client) [![PyPI Status](https://img.shields.io/pypi/v/huawei-modem-python-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-python-api-client)
+
 # Modem USB Huawei HTTP API client in Python
 
 This is a python lib to interact with Modem USB Huawei HTTP API. I tested it with:
