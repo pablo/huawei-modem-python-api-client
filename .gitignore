@@ -3,5 +3,9 @@ venv
 gw.py
 
 *.csv
+*.pyc
 
 initial_skip
+
+dist/*
+*.egg-info

@@ -1,0 +1,23 @@
+language: python
+python:
+- 3.5
+- 3.6
+matrix:
+  include:
+  - python: 3.7
+    dist: xenial
+    sudo: true
+sudo: false
+install:
+- pip install -U pip nose
+- pip install .
+script:
+- nosetests --stop --verbose tests
+deploy:
+  provider: pypi
+  user: dopstar
+  on:
+    tags: true
+  skip_existing: true
+  password:
+    secure: q6KoLHszJcxbx2sCX8I6hVxf8ig0p0IZr7W5rxCMGu1bYu+4IY55gBG8ZinNuzWCRvuitV3SbAAqFvwAirzNJ93rlRrTOUfmRxWaSlYrJH9nl6U4I/b9dqzS7uf4BJVQaSn/GMBxOFsDfgphRQNlc6GJqn5UmvSlhLEVfIrXs3q87ixukmrYlJSibZODCE2sx9AZjuQNlwGB4zSt4IpXdZnQuouSq7SHURnJuVYddfO2IBv9N2CFhHckqf4/48KpR4fsYsEHgrvHoyYNKiYVc84nUIwK2av5eC/e4wzP/AxmA7SShXQqlsEJc9ThEJIwkRo6jEbP+iI/v3nmPNpdwS0yJjhZVzwc+VssW4R2Lu8WDKKPs+0NJMWl7wsKuamWwLv2XnXlGuBXrEBom9MVTMxtX3jmT760WokkgXi1IM8YVi6jLfqqQdpd7CZrevZvGtE8aTTqg0tPWWhHfXFCPVeQ7/8XDyNh54OSTWgPx/PnvpMyzAggmzwqTVrMXhkh2QrwdgYVMJnzlRVeC+YqUpk5ykEMGH5VHFz5UUIV9a0QHP/DTkuC9A9QsqTtCCRguWtI+9323mp3b29x0OKpeq/iNdV+RmoTiyfySLbfqCx1KNpU4qZC7d3VGr9nRfVLweyXvOERazWpSm0Z5HHPRiTW1m0xSlH0yEm0Y64pGeE=

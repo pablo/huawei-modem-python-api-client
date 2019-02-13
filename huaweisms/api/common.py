@@ -1,4 +1,3 @@
-from pprint import pprint
 from xml.dom.minidom import Element
 
 import requests
@@ -13,6 +12,18 @@ class ApiCtx(object):
         self.logged_in = False
         self.token = None
         self.tokens = []
+
+    def __unicode__(self):
+        return '<{} {}>'.format(
+            self.__class__.__name__,
+            'online' if self.logged_in else 'offline'
+        )
+
+    def __repr__(self):
+        return self.__unicode__()
+
+    def __str__(self):
+        return self.__unicode__()
 
 
 def common_headers():
@@ -62,6 +73,7 @@ def check_response_headers(resp, ctx: ApiCtx):
     if 'SessionID' in resp.cookies:
         ctx.session_id = resp.cookies['SessionID']
 
+
 def post_to_url(url: str, data: str, ctx: ApiCtx = None, additional_headers: dict = None) -> dict:
     headers = common_headers()
 
@@ -79,7 +91,6 @@ def post_to_url(url: str, data: str, ctx: ApiCtx = None, additional_headers: dic
     check_response_headers(r, ctx)
 
     return api_response(r)
-
 
 
 def get_from_url(url: str, ctx: ApiCtx = None, additional_headers: dict = None) -> dict:
