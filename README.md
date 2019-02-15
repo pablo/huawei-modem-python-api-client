@@ -26,7 +26,17 @@ Please let me know if you tested it successfully with other modems as well.
    * send: sends a ussd message
    * get: retrieves a ussd message
 * wlan:
-    * host-list: gets a list of connected devices
+    * get_connected_hosts: gets a list of connected devices
+    * block_host: blocks the device from network
+    * unblock_host: unblock device on network
+    * get_blocked_hosts: gets a list of blocked devices
+    * is_host_blocked: checks if device is blocked
+* dialup:
+    * connect_mobile: enables mobile (ie LTE / 4G / 3G / etc) network
+    * disconnect_mobile: disables mobile network
+    * get_mobile_status: checks the mobile connection status
+* device:
+    * reboot: reboots the modem
 
 ### Prerequisites
 

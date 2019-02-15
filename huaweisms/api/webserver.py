@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 def SesTokInfo():
     logger.warning(
-        '"%s.SesTokInfo()" is deprecated, use "%s.get_session_token_info()',
+        '"%s.SesTokInfo()" is deprecated, use "%s.get_session_token_info()"',
         __name__,
         __name__
     )
