@@ -54,3 +54,28 @@ def get_dictionary_from_children(elem: Element):
 
 def parse_xml_string(xmlString: str) -> Document:
     return minidom.parseString(xmlString)
+
+
+def dict_to_xml(data: dict) -> str:
+    if not data:
+        return ''
+
+    def add_children(doc, parent, input_data):
+        if isinstance(input_data, dict):
+            for k, v in input_data.items():
+                child = doc.createElement(k)
+                parent.appendChild(child)
+                add_children(doc, child, v)
+        elif isinstance(input_data, (list, tuple)):
+            for item in input_data:
+                add_children(doc, parent, item)
+        else:
+            child = doc.createTextNode(str(input_data))
+            parent.appendChild(child)
+
+    document = Document()
+    key = list(data.keys())[0]
+    root = document.createElement(key)
+    document.appendChild(root)
+    add_children(document, root, data[key])
+    return document.toxml(encoding='utf8')

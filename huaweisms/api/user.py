@@ -21,9 +21,9 @@ def b64_sha256(data: str) -> str:
 
 def quick_login(username: str, password: str):
     ctx = ApiCtx()
-    token = huaweisms.api.webserver.SesTokInfo()
+    token = huaweisms.api.webserver.get_session_token_info()
     ctx.session_id = token['response']['SesInfo'].split("=")[1]
-    ctx.token = token['response']['TokInfo']
+    ctx.login_token = token['response']['TokInfo']
     response = login(ctx, username, password)
     if not ctx.logged_in:
         raise ValueError(json.dumps(response))
@@ -34,7 +34,7 @@ def login(ctx: ApiCtx, user_name: str, password: str):
     headers = common_headers()
     url = "{}/user/login".format(API_URL)
 
-    password_value = b64_sha256(user_name + b64_sha256(password) + ctx.token)
+    password_value = b64_sha256(user_name + b64_sha256(password) + ctx.login_token)
 
     xml_data = """
     <?xml version:"1.0" encoding="UTF-8"?>
@@ -46,7 +46,7 @@ def login(ctx: ApiCtx, user_name: str, password: str):
     """.format(user_name, password_value)
 
 #   setup headers
-    headers['__RequestVerificationToken'] = ctx.token
+    headers['__RequestVerificationToken'] = ctx.login_token
     headers['X-Requested-With'] = 'XMLHttpRequest'
 
     r = post_to_url(url, xml_data, ctx, headers)

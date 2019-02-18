@@ -9,7 +9,7 @@ matrix:
     sudo: true
 sudo: false
 install:
-- pip install -U pip nose
+- pip install -U pip nose mock
 - pip install .
 script:
 - nosetests --stop --verbose tests

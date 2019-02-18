@@ -15,10 +15,9 @@ def get_sms(ctx: ApiCtx, box_type: int = 1, page: int = 1, qty: int = 1):
             <UnreadPreferred>1</UnreadPreferred>
         </request>    
     """.format(page, qty, box_type)
-    tok = ctx.tokens.pop()
 
     headers = {
-        '__RequestVerificationToken': tok,
+        '__RequestVerificationToken': ctx.token,
         'X-Requested-With': 'XMLHttpRequest'
     }
     url = "{}/sms/sms-list".format(API_URL)
@@ -57,10 +56,9 @@ def send_sms(ctx: ApiCtx, dest, msg: str):
             <Date>{}</Date>
         </request> 
     """.format(phones_content, msg, len(msg), now_str)
-    tok = ctx.tokens.pop()
 
     headers = {
-        '__RequestVerificationToken': tok,
+        '__RequestVerificationToken': ctx.token,
         'X-Requested-With': 'XMLHttpRequest'
     }
     url = "{}/sms/send-sms".format(API_URL)
@@ -76,10 +74,9 @@ def delete_sms(ctx: ApiCtx, index: int):
             <Index>{}</Index>
         </request>
     """.format(index)
-    tok = ctx.tokens.pop()
 
     headers = {
-        '__RequestVerificationToken': tok,
+        '__RequestVerificationToken': ctx.token,
         'X-Requested-With': 'XMLHttpRequest'
     }
     url = "{}/sms/delete-sms".format(API_URL)
