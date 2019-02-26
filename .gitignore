@@ -1,6 +1,7 @@
 .idea
 venv
 gw.py
+analysis.py
 
 *.csv
 
