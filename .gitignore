@@ -4,5 +4,9 @@ gw.py
 analysis.py
 
 *.csv
+*.pyc
 
 initial_skip
+
+dist/*
+*.egg-info

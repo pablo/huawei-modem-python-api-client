@@ -1,4 +1,4 @@
-from pprint import pprint
+import logging
 from xml.dom.minidom import Element
 
 import requests
@@ -6,13 +6,35 @@ import requests
 from huaweisms.xml.util import get_child_text, parse_xml_string, get_dictionary_from_children
 
 
+logger = logging.getLogger(__name__)
+
+
 class ApiCtx(object):
 
     def __init__(self) -> None:
         self.session_id = None
         self.logged_in = False
-        self.token = None
+        self.login_token = None
         self.tokens = []
+
+    def __unicode__(self):
+        return '<{} {}>'.format(
+            self.__class__.__name__,
+            'online' if self.logged_in else 'offline'
+        )
+
+    def __repr__(self):
+        return self.__unicode__()
+
+    def __str__(self):
+        return self.__unicode__()
+
+    @property
+    def token(self):
+        if not self.tokens:
+            logger.warning('You ran out of tokens. You need to login again')
+            return None
+        return self.tokens.pop()
 
 
 def common_headers():
@@ -62,17 +84,13 @@ def check_response_headers(resp, ctx: ApiCtx):
     if 'SessionID' in resp.cookies:
         ctx.session_id = resp.cookies['SessionID']
 
+
 def post_to_url(url: str, data: str, ctx: ApiCtx = None, additional_headers: dict = None) -> dict:
+    cookies = build_cookies(ctx)
     headers = common_headers()
 
     if additional_headers:
         headers.update(additional_headers)
-
-    cookies = None
-    if ctx and ctx.session_id:
-        cookies = {
-            'SessionID': ctx.session_id
-        }
 
     r = requests.post(url, data=data, headers=headers, cookies=cookies)
 
@@ -81,22 +99,24 @@ def post_to_url(url: str, data: str, ctx: ApiCtx = None, additional_headers: dic
     return api_response(r)
 
 
-
 def get_from_url(url: str, ctx: ApiCtx = None, additional_headers: dict = None) -> dict:
-
+    cookies = build_cookies(ctx)
     headers = common_headers()
 
     if additional_headers:
         headers.update(additional_headers)
 
-    cookies = None
-    if ctx and ctx.session_id:
-        cookies = {
-            'SessionID': ctx.session_id
-        }
     r = requests.get(url, headers=headers, cookies=cookies)
 
     check_response_headers(r, ctx)
 
     return api_response(r)
 
+
+def build_cookies(ctx: ApiCtx):
+    cookies = None
+    if ctx and ctx.session_id:
+        cookies = {
+            'SessionID': ctx.session_id
+        }
+    return cookies

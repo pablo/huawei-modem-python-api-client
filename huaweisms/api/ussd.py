@@ -21,10 +21,9 @@ def send(ctx: ApiCtx, msg: str):
            <timeout></timeout>
         </request>
     """.format(msg)
-    tok = ctx.tokens.pop()
 
     headers = {
-        '__RequestVerificationToken': tok,
+        '__RequestVerificationToken': ctx.token,
         'X-Requested-With': 'XMLHttpRequest'
     }
     url = "{}/ussd/send".format(API_URL)

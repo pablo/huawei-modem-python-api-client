@@ -1,5 +1,4 @@
 from datetime import datetime
-from time import strptime, strftime
 
 from huaweisms.api.common import post_to_url, ApiCtx, get_from_url
 from .config import API_URL
@@ -16,20 +15,20 @@ def get_sms(ctx: ApiCtx, box_type: int = 1, page: int = 1, qty: int = 1):
             <UnreadPreferred>1</UnreadPreferred>
         </request>    
     """.format(page, qty, box_type)
-    tok = ctx.tokens.pop()
 
     headers = {
-        '__RequestVerificationToken': tok,
+        '__RequestVerificationToken': ctx.token,
         'X-Requested-With': 'XMLHttpRequest'
     }
     url = "{}/sms/sms-list".format(API_URL)
     r = post_to_url(url, xml_data, ctx, headers)
 
     if r['type'] == 'response':
-        if type(r['response']['Messages']['Message']) == dict:
-            m = r['response']['Messages']['Message']
-            r['response']['Messages']['Message'] = []
-            r['response']['Messages']['Message'].append(m)
+        if r['response']['Count']!='0':
+            if type(r['response']['Messages']['Message']) == dict:
+                m = r['response']['Messages']['Message']
+                r['response']['Messages']['Message'] = []
+                r['response']['Messages']['Message'].append(m)
 
     return r
 
@@ -57,10 +56,9 @@ def send_sms(ctx: ApiCtx, dest, msg: str):
             <Date>{}</Date>
         </request> 
     """.format(phones_content, msg, len(msg), now_str)
-    tok = ctx.tokens.pop()
 
     headers = {
-        '__RequestVerificationToken': tok,
+        '__RequestVerificationToken': ctx.token,
         'X-Requested-With': 'XMLHttpRequest'
     }
     url = "{}/sms/send-sms".format(API_URL)
@@ -76,10 +74,9 @@ def delete_sms(ctx: ApiCtx, index: int):
             <Index>{}</Index>
         </request>
     """.format(index)
-    tok = ctx.tokens.pop()
 
     headers = {
-        '__RequestVerificationToken': tok,
+        '__RequestVerificationToken': ctx.token,
         'X-Requested-With': 'XMLHttpRequest'
     }
     url = "{}/sms/delete-sms".format(API_URL)

@@ -1,9 +1,12 @@
+[![Build Status](https://travis-ci.org/dopstar/huawei-modem-python-api-client.svg?branch=master)](https://travis-ci.org/dopstar/huawei-modem-python-api-client) [![Python Version](https://img.shields.io/pypi/pyversions/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client) [![PyPI Status](https://img.shields.io/pypi/v/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client)
+
 # Modem USB Huawei HTTP API client in Python
 
 This is a python lib to interact with Modem USB Huawei HTTP API. I tested it with:
 
 * E5180
 * E8372
+* B315
 
 Please let me know if you tested it successfully with other modems as well.
 
@@ -22,6 +25,18 @@ Please let me know if you tested it successfully with other modems as well.
    * status: get status of ussd. This will tell you if there are ussd messages available to read
    * send: sends a ussd message
    * get: retrieves a ussd message
+* wlan:
+    * get_connected_hosts: gets a list of connected devices
+    * block_host: blocks the device from network
+    * unblock_host: unblock device on network
+    * get_blocked_hosts: gets a list of blocked devices
+    * is_host_blocked: checks if device is blocked
+* dialup:
+    * connect_mobile: enables mobile (ie LTE / 4G / 3G / etc) network
+    * disconnect_mobile: disables mobile network
+    * get_mobile_status: checks the mobile connection status
+* device:
+    * reboot: reboots the modem
 
 ### Prerequisites
 
@@ -38,7 +53,31 @@ requests==2.0.0
 
 ### Installing
 
-Todo: make it a `pip install` option for this package.
+```bash
+pip install huawei-modem-api-client
+```
+
+### Example
+```python
+import huaweisms.api.user
+import huaweisms.api.wlan
+import huaweisms.api.sms
+
+ctx = huaweisms.api.user.quick_login("myusername", "mypassword")
+print(ctx)
+# output: <ApiCtx online>
+
+# sending sms
+huaweisms.api.sms.send_sms(
+    ctx,
+    'phone-number',
+    'this is the sms message'
+)
+
+# connected devices
+device_list = huaweisms.api.wlan.get_connected_hosts(ctx)
+
+```
 
 ## Built With
 
