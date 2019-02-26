@@ -33,6 +33,7 @@ setup_args = {
         'huaweisms.api',
         'huaweisms.xml',
     ],
+    'data_files': [('', ['requirements.txt'])],
     'install_requires': requirements,
     'keywords': 'Huawei Modem API',
     'classifiers': [
