@@ -1,7 +1,6 @@
 from huaweisms.api.common import get_from_url, ApiCtx
-from .config import API_URL
 
 
 def status(ctx: ApiCtx):
-    url = "{}/monitoring/status".format(API_URL)
+    url = "{}/monitoring/status".format(ctx.api_base_url)
     return get_from_url(url, ctx)

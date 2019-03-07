@@ -8,7 +8,7 @@ def get_element_text(elem: Element) -> str:
 
 def get_child_text(elem: Element, nodeName: str) -> str:
     children = elem.getElementsByTagName(nodeName)
-    if len(children) > 0:
+    if children:
         return get_element_text(children[0])
     return None
 
@@ -46,9 +46,8 @@ def get_dictionary_from_children(elem: Element):
             else:
                 ret[n] = get_dictionary_from_children(node)
 
-    if len(ret) == 0:
+    if not ret:
         ret = get_element_text(elem)
-
     return ret
 
 

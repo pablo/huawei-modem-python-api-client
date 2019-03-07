@@ -1,21 +1,25 @@
 import logging
 
+from huaweisms.api.config import MODEM_HOST
 from huaweisms.api.common import get_from_url
-from .config import API_URL
 
 
 logger = logging.getLogger(__name__)
 
 
-def SesTokInfo():
-    logger.warning(
-        '"%s.SesTokInfo()" is deprecated, use "%s.get_session_token_info()"',
-        __name__,
-        __name__
-    )
-    return get_session_token_info()
+def get_session_token_info(base_url: str = None):
+    """
+    Get session token information
 
+    :param base_url: base url for the modem api
+    :return:
+    """
+    if base_url is None:
+        logger.warning(
+            'calling %s.get_session_token_info without base_url argument is deprecated',
+            __name__
+        )
+        base_url = 'http://{}/api'.format(MODEM_HOST)
 
-def get_session_token_info():
-    url = "{}/webserver/SesTokInfo".format(API_URL)
-    return get_from_url(url)
+    url = "{}/webserver/SesTokInfo".format(base_url)
+    return get_from_url(url, timeout=30)

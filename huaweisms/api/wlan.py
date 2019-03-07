@@ -1,10 +1,9 @@
-from huaweisms.api.config import API_URL
 import huaweisms.api.common
 import huaweisms.xml.util
 
 
 def get_connected_hosts(ctx: huaweisms.api.common.ApiCtx):
-    url = "{}/wlan/host-list".format(API_URL)
+    url = "{}/wlan/host-list".format(ctx.api_base_url)
     return huaweisms.api.common.get_from_url(url, ctx)
 
 
@@ -14,7 +13,7 @@ def block_host(ctx: huaweisms.api.common.ApiCtx, mac_address: str, hostname: str
 
     see http://192.168.8.1/html/wlanmacfilter.html
     """
-    url = '{}/wlan/multi-macfilter-settings'.format(API_URL)
+    url = '{}/wlan/multi-macfilter-settings'.format(ctx.api_base_url)
     if is_host_blocked(ctx, mac_address):
         return True
 
@@ -44,7 +43,7 @@ def unblock_host(ctx: huaweisms.api.common.ApiCtx, mac_address: str):
 
     see http://192.168.8.1/html/wlanmacfilter.html
     """
-    url = '{}/wlan/multi-macfilter-settings'.format(API_URL)
+    url = '{}/wlan/multi-macfilter-settings'.format(ctx.api_base_url)
     if not is_host_blocked(ctx, mac_address):
         return True
 
@@ -66,7 +65,7 @@ def unblock_host(ctx: huaweisms.api.common.ApiCtx, mac_address: str):
 
 
 def get_blocked_hosts(ctx: huaweisms.api.common.ApiCtx):
-    url = '{}/wlan/multi-macfilter-settings'.format(API_URL)
+    url = '{}/wlan/multi-macfilter-settings'.format(ctx.api_base_url)
     return huaweisms.api.common.get_from_url(url, ctx)
 
 
