@@ -1,6 +1,6 @@
 from pprint import pprint
 
-from huaweisms.api import webserver, device, monitoring, user, sms, ussd
+from huaweisms.api import monitoring, user, sms
 from huaweisms.api.common import ApiCtx
 
 

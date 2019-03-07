@@ -2,6 +2,7 @@ import logging
 from xml.dom.minidom import Element
 
 import requests
+from huaweisms.api.config import MODEM_HOST
 
 from huaweisms.xml.util import get_child_text, parse_xml_string, get_dictionary_from_children
 
@@ -9,18 +10,19 @@ from huaweisms.xml.util import get_child_text, parse_xml_string, get_dictionary_
 logger = logging.getLogger(__name__)
 
 
-class ApiCtx(object):
+class ApiCtx:
 
-    def __init__(self) -> None:
+    def __init__(self, modem_host=None) -> None:
         self.session_id = None
         self.logged_in = False
         self.login_token = None
         self.tokens = []
+        self.__modem_host = modem_host if modem_host else MODEM_HOST
 
     def __unicode__(self):
-        return '<{} {}>'.format(
+        return '<{} modem_host={}>'.format(
             self.__class__.__name__,
-            'online' if self.logged_in else 'offline'
+            self.__modem_host
         )
 
     def __repr__(self):
@@ -28,6 +30,10 @@ class ApiCtx(object):
 
     def __str__(self):
         return self.__unicode__()
+
+    @property
+    def api_base_url(self):
+        return 'http://{}/api'.format(self.__modem_host)
 
     @property
     def token(self):
@@ -99,14 +105,15 @@ def post_to_url(url: str, data: str, ctx: ApiCtx = None, additional_headers: dic
     return api_response(r)
 
 
-def get_from_url(url: str, ctx: ApiCtx = None, additional_headers: dict = None) -> dict:
+def get_from_url(url: str, ctx: ApiCtx = None, additional_headers: dict = None,
+                 timeout: int = None) -> dict:
     cookies = build_cookies(ctx)
     headers = common_headers()
 
     if additional_headers:
         headers.update(additional_headers)
 
-    r = requests.get(url, headers=headers, cookies=cookies)
+    r = requests.get(url, headers=headers, cookies=cookies, timeout=timeout)
 
     check_response_headers(r, ctx)
 

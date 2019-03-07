@@ -1,5 +1,4 @@
 import huaweisms.api.common
-from huaweisms.api.config import API_URL
 
 
 XML_TEMPLATE = (
@@ -19,7 +18,7 @@ def disconnect_mobile(ctx: huaweisms.api.common.ApiCtx):
 
 
 def get_mobile_status(ctx: huaweisms.api.common.ApiCtx):
-    url = "{}/dialup/mobile-dataswitch".format(API_URL)
+    url = "{}/dialup/mobile-dataswitch".format(ctx.api_base_url)
     result = huaweisms.api.common.get_from_url(url, ctx)
     if result and result.get('type') == 'response':
         response = result['response']
@@ -35,7 +34,7 @@ def switch_mobile_off(ctx: huaweisms.api.common.ApiCtx):
     headers = {
         '__RequestVerificationToken': ctx.token,
     }
-    url = "{}/dialup/mobile-dataswitch".format(API_URL)
+    url = "{}/dialup/mobile-dataswitch".format(ctx.api_base_url)
     return huaweisms.api.common.post_to_url(url, data, ctx, additional_headers=headers)
 
 
@@ -44,5 +43,5 @@ def switch_mobile_on(ctx: huaweisms.api.common.ApiCtx):
     headers = {
         '__RequestVerificationToken': ctx.token,
     }
-    url = "{}/dialup/mobile-dataswitch".format(API_URL)
+    url = "{}/dialup/mobile-dataswitch".format(ctx.api_base_url)
     return huaweisms.api.common.post_to_url(url, data, ctx, additional_headers=headers)

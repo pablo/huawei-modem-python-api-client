@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/dopstar/huawei-modem-python-api-client.svg?branch=master)](https://travis-ci.org/dopstar/huawei-modem-python-api-client) [![Python Version](https://img.shields.io/pypi/pyversions/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client) [![PyPI Status](https://img.shields.io/pypi/v/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client)
+[![Build Status](https://travis-ci.org/dopstar/huawei-modem-python-api-client.svg?branch=master)](https://travis-ci.org/dopstar/huawei-modem-python-api-client) [![Python Version](https://img.shields.io/pypi/pyversions/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client) [![PyPI Status](https://img.shields.io/pypi/v/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client) [![PyPI Downloads](https://img.shields.io/pypi/dm/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client)
 
 # Modem USB Huawei HTTP API client in Python
 
@@ -13,7 +13,7 @@ Please let me know if you tested it successfully with other modems as well.
 ## Currently Supported
 
 * webserver
-   * SesTokInfo: gets a session token to use
+   * get_session_token_info: gets a session token to use
 * user
    * login: creates a new session on the HTTP API
 * sms
@@ -65,7 +65,7 @@ import huaweisms.api.sms
 
 ctx = huaweisms.api.user.quick_login("myusername", "mypassword")
 print(ctx)
-# output: <ApiCtx online>
+# output: <ApiCtx modem_host=192.168.8.1>
 
 # sending sms
 huaweisms.api.sms.send_sms(
@@ -77,6 +77,16 @@ huaweisms.api.sms.send_sms(
 # connected devices
 device_list = huaweisms.api.wlan.get_connected_hosts(ctx)
 
+```
+
+Note: The default modem host is assumed to be `192.168.8.1`. If that is not the case for you, you can specify your modem ip as follows:
+
+```python
+import huaweisms.api.user
+ctx = huaweisms.api.user.quick_login("myusername", "mypassword", modem_host='10.11.12.13')
+print(ctx)
+
+#output: <ApiCtx modem_host=10.11.12.13>
 ```
 
 ## Built With

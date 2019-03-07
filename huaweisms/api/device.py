@@ -3,16 +3,15 @@ from huaweisms.api.common import (
     get_from_url,
     ApiCtx,
 )
-from .config import API_URL
 
 
 def information(ctx: ApiCtx) -> dict:
-    url = "{}/device/information".format(API_URL)
+    url = "{}/device/information".format(ctx.api_base_url)
     return get_from_url(url, ctx)
 
 
 def basic_information(ctx: ApiCtx) -> dict:
-    url = "{}/device/information".format(API_URL)
+    url = "{}/device/information".format(ctx.api_base_url)
     return get_from_url(url, ctx)
 
 
@@ -21,7 +20,7 @@ def reboot(ctx: ApiCtx) -> dict:
     Reboots the modem.
     """
 
-    url = '{}/device/control'.format(API_URL)
+    url = '{}/device/control'.format(ctx.api_base_url)
     headers = {
         '__RequestVerificationToken': ctx.token,
     }
