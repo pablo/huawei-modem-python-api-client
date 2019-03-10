@@ -10,3 +10,6 @@ initial_skip
 
 dist/*
 *.egg-info
+
+coverage.xml
+.coverage
