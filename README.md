@@ -1,9 +1,10 @@
 [![Build Status](https://travis-ci.org/dopstar/huawei-modem-python-api-client.svg?branch=master)](https://travis-ci.org/dopstar/huawei-modem-python-api-client) [![Python Version](https://img.shields.io/pypi/pyversions/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client) [![PyPI Status](https://img.shields.io/pypi/v/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client) [![PyPI Downloads](https://img.shields.io/pypi/dm/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client)
 
-# Modem USB Huawei HTTP API client in Python
+# Python HTTP API client for Huawei Modems
 
-This is a python lib to interact with Modem USB Huawei HTTP API. I tested it with:
+This is a python library to interact with a Huawei modem over HTTP API.
 
+The library has been tested on these devices:
 * E5180
 * E8372
 * B315
@@ -45,10 +46,11 @@ Only [`requests`](https://github.com/requests/requests) library (and its depende
 This is `requirements.txt` content:
 
 ```
-certifi==2018.1.18
+certifi==2018.11.29
 chardet==3.0.4
-idna==2.6
-requests==2.0.0
+idna>=2.6
+requests>=2.0.0
+urllib3>=1.22
 ```
 
 ### Installing
@@ -99,7 +101,8 @@ Send me a PM if you want to contribute.
 
 ## Authors
 
-* **Pablo Santa Cruz** - *Initial work* - [pablo](https://github.com/pablo)
+* **Pablo Santa Cruz** - *Owner* - [pablo](https://github.com/pablo)
+* **Mka Madlavana** - *Collaborator* - [dopstar](https://github.com/dopstar)
 
 ## License
 

@@ -1,3 +1,4 @@
+from typing import Union
 from xml.dom import minidom
 from xml.dom.minidom import Element, Document
 
@@ -6,8 +7,8 @@ def get_element_text(elem: Element) -> str:
     return " ".join(t.nodeValue for t in elem.childNodes if t.nodeType == t.TEXT_NODE)
 
 
-def get_child_text(elem: Element, nodeName: str) -> str:
-    children = elem.getElementsByTagName(nodeName)
+def get_child_text(elem: Element, node_name: str) -> Union[str, None]:
+    children = elem.getElementsByTagName(node_name)
     if children:
         return get_element_text(children[0])
     return None
@@ -23,12 +24,7 @@ def elements_dictionary(elem: Element) -> dict:
             else:
                 ret[n] = 0
 
-    for k, v in ret.items():
-        if v > 1:
-            ret[k] = []
-        else:
-            ret[k] = None
-
+    ret = {k: [] if v > 1 else None for k, v in ret.items()}
     return ret
 
 
@@ -51,8 +47,8 @@ def get_dictionary_from_children(elem: Element):
     return ret
 
 
-def parse_xml_string(xmlString: str) -> Document:
-    return minidom.parseString(xmlString)
+def parse_xml_string(xml_string: str) -> Document:
+    return minidom.parseString(xml_string)
 
 
 def dict_to_xml(data: dict) -> str:
