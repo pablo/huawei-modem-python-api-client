@@ -5,6 +5,20 @@ version = '1.0.5'
 with open('requirements.txt') as fd:
     requirements = [line.strip() for line in fd if line.strip()]
 
+testing_requirements = [
+    'nose',
+    'mock',
+    'faker',
+    'nosexcover',
+    'python-coveralls',
+]
+
+linting_requirements = [
+    'flake8',
+    'pylint',
+    'bandit',
+]
+
 with open('README.md') as fd:
     long_description = fd.read()
 
@@ -35,6 +49,11 @@ setup_args = {
     ],
     'data_files': [('', ['requirements.txt'])],
     'install_requires': requirements,
+    'tests_require': testing_requirements,
+    'extras_require': {
+        'testing': testing_requirements,
+        'linting': linting_requirements,
+    },
     'keywords': ['Huawei', 'Modem', 'HTTP API Client', 'API Client', 'Router'],
     'classifiers': [
         'Development Status :: {0}'.format(dev_status),
