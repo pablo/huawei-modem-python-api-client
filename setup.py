@@ -1,6 +1,6 @@
 from setuptools import setup
 
-version = '1.0.3'
+version = '1.0.4'
 
 with open('requirements.txt') as fd:
     requirements = [line.strip() for line in fd if line.strip()]
@@ -21,7 +21,7 @@ setup_args = {
     'author': 'Pablo Santa Cruz, Mkhanyisi Madlavana',
     'author_email': 'pablo@roshka.com.py, mkhanyisi@gmail.com',
     'url': 'https://github.com/pablo/huawei-modem-python-api-client',
-    'download_url': 'https://github.com/pablo/huawei-modem-python-api-client/tarball/{0}'.format(
+    'download_url': 'https://github.com/dopstar/huawei-modem-python-api-client/tarball/{0}'.format(
         version
     ),
     'package_dir': {'huaweisms': 'huaweisms'},
@@ -35,14 +35,20 @@ setup_args = {
     ],
     'data_files': [('', ['requirements.txt'])],
     'install_requires': requirements,
-    'keywords': 'Huawei Modem API',
+    'keywords': ['Huawei', 'Modem', 'HTTP API Client', 'API Client', 'Router'],
     'classifiers': [
         'Development Status :: {0}'.format(dev_status),
-        'Intended Audience :: End Users/Desktop',
+        'Intended Audience :: Developers',
         'Natural Language :: English',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: MacOS',
+        'Operating System :: POSIX :: Linux',
+        'Operating System :: Microsoft :: Windows',
+        'Topic :: Software Development :: Version Control :: Git',
+        'Programming Language :: Python :: Implementation :: CPython',
     ],
 }
 

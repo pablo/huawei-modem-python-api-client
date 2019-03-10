@@ -26,9 +26,7 @@ def get_sms(ctx: ApiCtx, box_type: int = 1, page: int = 1, qty: int = 1):
         if r['response']['Count'] != '0':
             if isinstance(r['response']['Messages']['Message'], dict):
                 m = r['response']['Messages']['Message']
-                r['response']['Messages']['Message'] = []
-                r['response']['Messages']['Message'].append(m)
-
+                r['response']['Messages']['Message'] = [m]
     return r
 
 
@@ -36,12 +34,9 @@ def send_sms(ctx: ApiCtx, dest, msg: str):
 
     now = datetime.now()
     now_str = now.strftime("%Y-%m-%d %H:%M:%S")
-    if isinstance(dest, str):
-        phones_content = '<Phone>{}</Phone>'.format(dest)
-    else:
-        phones_content = ""
-        for phone in dest:
-            phones_content += '<Phone>{}</Phone>\n'.format(phone)
+    dest = [dest] if isinstance(dest, str) else dest
+
+    phones_content = '\n'.join('<Phone>{}</Phone>'.format(phone) for phone in dest)
     xml_data = """
         <request>
             <Index>-1</Index>

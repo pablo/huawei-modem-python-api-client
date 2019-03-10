@@ -1,4 +1,5 @@
 import logging
+from typing import Union
 from xml.dom.minidom import Element
 
 import requests
@@ -49,7 +50,7 @@ def common_headers():
     }
 
 
-def check_error(elem: Element) -> dict:
+def check_error(elem: Element) -> Union[dict, None]:
     if elem.nodeName != "error":
         return None
 
@@ -69,7 +70,6 @@ def api_response(r: requests.Response) -> dict:
     xmldoc = parse_xml_string(r.text)
 
     err = check_error(xmldoc.documentElement)
-
     if err:
         return err
 
@@ -99,9 +99,7 @@ def post_to_url(url: str, data: str, ctx: ApiCtx = None, additional_headers: dic
         headers.update(additional_headers)
 
     r = requests.post(url, data=data, headers=headers, cookies=cookies)
-
     check_response_headers(r, ctx)
-
     return api_response(r)
 
 
@@ -114,9 +112,7 @@ def get_from_url(url: str, ctx: ApiCtx = None, additional_headers: dict = None,
         headers.update(additional_headers)
 
     r = requests.get(url, headers=headers, cookies=cookies, timeout=timeout)
-
     check_response_headers(r, ctx)
-
     return api_response(r)
 
 
