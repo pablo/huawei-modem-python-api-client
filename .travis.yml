@@ -9,8 +9,8 @@ matrix:
     sudo: true
 sudo: false
 install:
-- pip install -U pip nose mock flake8 pylint bandit nosexcover python-coveralls
-- pip install .
+- pip install -U pip
+- pip install .[testing,linting]
 script:
 - flake8 --ignore=E501 .
 - bandit --recursive --skip=B318,B408 .
