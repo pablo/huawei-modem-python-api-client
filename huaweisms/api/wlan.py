@@ -28,7 +28,10 @@ def block_host(ctx: huaweisms.api.common.ApiCtx, mac_address: str, hostname: str
                 ssid[mac_key] = mac_address
                 break
         else:
-            raise ValueError('Failed to blacklist [{}], slots are full.'.format(mac_address))
+            continue
+        break
+    else:
+        raise ValueError('Failed to blacklist [{}], slots are full.'.format(mac_address))
 
     payload = huaweisms.xml.util.dict_to_xml({'request': response})
     headers = {
@@ -53,7 +56,8 @@ def unblock_host(ctx: huaweisms.api.common.ApiCtx, mac_address: str):
         for index in range(10):
             host_key = 'wifihostname{}'.format(index)
             mac_key = 'WifiMacFilterMac{}'.format(index)
-            if ssid.get(mac_key).lower() == mac_address.lower():
+
+            if ssid.get(mac_key) and ssid[mac_key].lower() == mac_address.lower():
                 ssid[host_key] = ''
                 ssid[mac_key] = ''
 
