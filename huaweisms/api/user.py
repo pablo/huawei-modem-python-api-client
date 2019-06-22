@@ -21,7 +21,8 @@ def b64_sha256(data: str) -> str:
 def quick_login(username: str, password: str, modem_host: str = None):
     ctx = ApiCtx(modem_host=modem_host)
     token = huaweisms.api.webserver.get_session_token_info(ctx.api_base_url)
-    ctx.session_id = token['response']['SesInfo'].split("=")[1]
+    session_token = token['response']['SesInfo'].split("=")
+    ctx.session_id = session_token[1] if len(session_token) > 1 else session_token[0]
     ctx.login_token = token['response']['TokInfo']
     response = login(ctx, username, password)
     if not ctx.logged_in:
