@@ -7,10 +7,11 @@ import faker
 from mock import patch
 
 import random
+import compat
 import huaweisms.api.wlan
 import huaweisms.api.common
 
-
+@compat.py2_compat
 class WlanTestCase(unittest.TestCase):
 
     @classmethod

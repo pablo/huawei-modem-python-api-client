@@ -5,17 +5,20 @@ from huaweisms.api.common import (
 )
 
 
-def information(ctx: ApiCtx) -> dict:
+def information(ctx):
+    # type: (ApiCtx) -> dict
     url = "{}/device/information".format(ctx.api_base_url)
     return get_from_url(url, ctx)
 
 
-def basic_information(ctx: ApiCtx) -> dict:
+def basic_information(ctx):
+    # type: (ApiCtx) -> dict
     url = "{}/device/information".format(ctx.api_base_url)
     return get_from_url(url, ctx)
 
 
-def reboot(ctx: ApiCtx) -> dict:
+def reboot(ctx):
+    # type: (ApiCtx) -> dict
     """
     Reboots the modem.
     """

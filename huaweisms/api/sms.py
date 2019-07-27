@@ -3,7 +3,8 @@ from datetime import datetime
 from huaweisms.api.common import post_to_url, ApiCtx, get_from_url
 
 
-def get_sms(ctx: ApiCtx, box_type: int = 1, page: int = 1, qty: int = 1):
+def get_sms(ctx, box_type = 1, page = 1, qty = 1):
+    # type: (ApiCtx, int, int, int) -> ...
     xml_data = """
         <request>
             <PageIndex>{}</PageIndex>
@@ -30,7 +31,8 @@ def get_sms(ctx: ApiCtx, box_type: int = 1, page: int = 1, qty: int = 1):
     return r
 
 
-def send_sms(ctx: ApiCtx, dest, msg: str):
+def send_sms(ctx, dest, msg):
+    # type: (ApiCtx, ..., str) -> ...
 
     now = datetime.now()
     now_str = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -60,7 +62,8 @@ def send_sms(ctx: ApiCtx, dest, msg: str):
     return r
 
 
-def delete_sms(ctx: ApiCtx, index: int):
+def delete_sms(ctx, index):
+    # type: (ApiCtx, int) -> ...
 
     xml_data = """
         <?xml version:"1.0" encoding="UTF-8"?>
@@ -78,6 +81,7 @@ def delete_sms(ctx: ApiCtx, index: int):
     return r
 
 
-def sms_count(ctx: ApiCtx):
+def sms_count(ctx):
+    # type: (ApiCtx) -> ...
     url = "{}/sms/sms-count".format(ctx.api_base_url)
     return get_from_url(url, ctx)

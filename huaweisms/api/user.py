@@ -10,7 +10,8 @@ import huaweisms.api.webserver
 from huaweisms.api.common import common_headers, ApiCtx, post_to_url, get_from_url
 
 
-def b64_sha256(data: str) -> str:
+def b64_sha256(data):
+    # type: (str) -> str
     s256 = hashlib.sha256()
     s256.update(data.encode('utf-8'))
     dg = s256.digest()
@@ -18,7 +19,8 @@ def b64_sha256(data: str) -> str:
     return base64.urlsafe_b64encode(hs256).decode('utf-8', 'ignore')
 
 
-def quick_login(username: str, password: str, modem_host: str = None):
+def quick_login(username, password, modem_host = None):
+    # type: (str, str, str) -> ...
     ctx = ApiCtx(modem_host=modem_host)
     token = huaweisms.api.webserver.get_session_token_info(ctx.api_base_url)
     session_token = token['response']['SesInfo'].split("=")
@@ -30,7 +32,8 @@ def quick_login(username: str, password: str, modem_host: str = None):
     return ctx
 
 
-def login(ctx: ApiCtx, user_name: str, password: str):
+def login(ctx, user_name, password):
+    # type: (ApiCtx, str, str) -> ...
     headers = common_headers()
     url = "{}/user/login".format(ctx.api_base_url)
 
@@ -57,6 +60,7 @@ def login(ctx: ApiCtx, user_name: str, password: str):
     return r
 
 
-def state_login(ctx: ApiCtx):
+def state_login(ctx):
+    # type: (ApiCtx) -> ...
     url = "{}/user/state-login".format(ctx.api_base_url)
     return get_from_url(url, ctx)

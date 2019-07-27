@@ -7,7 +7,8 @@ from huaweisms.api.common import get_from_url
 logger = logging.getLogger(__name__)
 
 
-def get_session_token_info(base_url: str = None):
+def get_session_token_info(base_url = None):
+    # type: (str) -> ...
     """
     Get session token information
 
