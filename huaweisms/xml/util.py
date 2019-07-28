@@ -3,18 +3,21 @@ from xml.dom import minidom
 from xml.dom.minidom import Element, Document
 
 
-def get_element_text(elem: Element) -> str:
+def get_element_text(elem):
+    # type: (Element) -> str
     return " ".join(t.nodeValue for t in elem.childNodes if t.nodeType == t.TEXT_NODE)
 
 
-def get_child_text(elem: Element, node_name: str) -> Union[str, None]:
+def get_child_text(elem, node_name):
+    # type: (Element, str) -> Union[str, None]
     children = elem.getElementsByTagName(node_name)
     if children:
         return get_element_text(children[0])
     return None
 
 
-def elements_dictionary(elem: Element) -> dict:
+def elements_dictionary(elem):
+    # type: (Element) -> dict
     ret = {}
     for node in elem.childNodes:
         if node.nodeType == node.ELEMENT_NODE:
@@ -28,7 +31,8 @@ def elements_dictionary(elem: Element) -> dict:
     return ret
 
 
-def get_dictionary_from_children(elem: Element):
+def get_dictionary_from_children(elem):
+    # type: (Element) -> ...
 
     ret = elements_dictionary(elem)
 
@@ -47,11 +51,13 @@ def get_dictionary_from_children(elem: Element):
     return ret
 
 
-def parse_xml_string(xml_string: str) -> Document:
+def parse_xml_string(xml_string):
+    # type: (str) -> Document
     return minidom.parseString(xml_string)
 
 
-def dict_to_xml(data: dict) -> str:
+def dict_to_xml(data):
+    # type: (dict) -> str
     if not data:
         return ''
 

@@ -13,7 +13,8 @@ def get_session():
     return user.quick_login(USER, PASSWORD)
 
 
-def valid_context(ctx: ApiCtx):
+def valid_context(ctx):
+    # type: (ApiCtx) -> ...
     sl = user.state_login(ctx)
     if sl['type'] == 'response' and sl['response']['State'] != -1:
         return True
