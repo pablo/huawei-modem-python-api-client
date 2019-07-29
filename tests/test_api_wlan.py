@@ -7,11 +7,10 @@ import faker
 from mock import patch
 
 import random
-import compat
+import six
 import huaweisms.api.wlan
 import huaweisms.api.common
 
-@compat.py2_compat
 class WlanTestCase(unittest.TestCase):
 
     @classmethod
@@ -154,7 +153,7 @@ class WlanTestCase(unittest.TestCase):
         ctx = huaweisms.api.common.ApiCtx(modem_host=fake_ip)
 
         error_msg = r'Failed to blacklist \[{}\], slots are full.'.format(fake_mac)
-        with self.assertRaisesRegex(ValueError, error_msg):
+        with six.assertRaisesRegex(self, ValueError, error_msg):
             huaweisms.api.wlan.block_host(ctx, fake_mac)
         mock_post_to_url.assert_not_called()
         mock_dict_to_xml.assert_not_called()

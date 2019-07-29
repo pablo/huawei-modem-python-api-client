@@ -4,3 +4,4 @@ idna>=2.6
 requests>=2.0.0
 urllib3>=1.22
 typing>=3.7.4
+six>=1.12.0

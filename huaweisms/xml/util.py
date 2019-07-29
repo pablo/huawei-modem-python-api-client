@@ -1,3 +1,4 @@
+import six
 from typing import Union
 from xml.dom import minidom
 from xml.dom.minidom import Element, Document
@@ -53,7 +54,8 @@ def get_dictionary_from_children(elem):
 
 def parse_xml_string(xml_string):
     # type: (str) -> Document
-    return minidom.parseString(xml_string)
+    parseable_xml_string = six.ensure_str(xml_string)
+    return minidom.parseString(parseable_xml_string)
 
 
 def dict_to_xml(data):

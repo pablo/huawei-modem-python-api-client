@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import six
 from huaweisms.api.common import post_to_url, ApiCtx, get_from_url
 
 
@@ -36,7 +37,7 @@ def send_sms(ctx, dest, msg):
 
     now = datetime.now()
     now_str = now.strftime("%Y-%m-%d %H:%M:%S")
-    dest = [dest] if isinstance(dest, str) else dest
+    dest = [dest] if isinstance(dest, six.string_types) else dest
 
     phones_content = '\n'.join('<Phone>{}</Phone>'.format(phone) for phone in dest)
     xml_data = """
