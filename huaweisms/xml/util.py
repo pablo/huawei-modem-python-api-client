@@ -44,6 +44,9 @@ def get_dictionary_from_children(elem):
                 ret[n] = get_dictionary_from_children(node)
             elif isinstance(ret[n], list):
                 ret[n].append(get_dictionary_from_children(node))
+            elif isinstance(ret[n], dict):
+                previous_val = ret[n]
+                ret[n] = [previous_val, get_dictionary_from_children(node)]
             else:
                 ret[n] = get_dictionary_from_children(node)
 
