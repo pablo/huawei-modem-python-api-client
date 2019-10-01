@@ -15,7 +15,6 @@ install:
 script:
 - flake8 --ignore=E501 .
 - bandit --recursive --skip=B311,B318,B408 .
-- pylint --disable=C0111,C0103 huaweisms
 - nosetests --stop --verbose --with-xcoverage --cover-package=huaweisms --cover-tests tests
 after_success:
 - coveralls
