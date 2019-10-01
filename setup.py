@@ -1,6 +1,6 @@
 from setuptools import setup
 
-version = '1.0.7'
+version = '1.0.8'
 
 with open('requirements.txt') as fd:
     requirements = [line.strip() for line in fd if line.strip()]
@@ -59,6 +59,7 @@ setup_args = {
         'Development Status :: {0}'.format(dev_status),
         'Intended Audience :: Developers',
         'Natural Language :: English',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
