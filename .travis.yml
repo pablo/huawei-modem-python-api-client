@@ -14,7 +14,6 @@ install:
 - pip install .[testing,linting]
 script:
 - flake8 --ignore=E501 .
-- bandit --recursive --skip=B311,B318,B408 .
 - nosetests --stop --verbose --with-xcoverage --cover-package=huaweisms --cover-tests tests
 after_success:
 - coveralls
