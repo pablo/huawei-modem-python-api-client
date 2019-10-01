@@ -1,6 +1,6 @@
 from setuptools import setup
 
-version = '1.0.6'
+version = '1.0.7'
 
 with open('requirements.txt') as fd:
     requirements = [line.strip() for line in fd if line.strip()]

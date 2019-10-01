@@ -4,8 +4,18 @@ import six
 from huaweisms.api.common import post_to_url, ApiCtx, get_from_url
 
 
-def get_sms(ctx, box_type = 1, page = 1, qty = 1):
-    # type: (ApiCtx, int, int, int) -> ...
+def get_sms(ctx, box_type=1, page=1, qty=1, unread_preferred=True):
+    """
+     Gets available SMS from the router.
+
+    :param ctx: ApiCtx object.
+    :param box_type: 1 == inbox, 2 == outbox. integer.
+    :param page: page number during pagination (used with qty). integer.
+    :param qty: maximum number of items per page. integer.
+    :param unread_preferred: if True, unread SMS'es are listed first, otherwise
+        they are listed by date in descending order. boolean.
+    :return: a collection of sms records.
+    """
     xml_data = """
         <request>
             <PageIndex>{}</PageIndex>
@@ -13,9 +23,14 @@ def get_sms(ctx, box_type = 1, page = 1, qty = 1):
             <BoxType>{}</BoxType>
             <SortType>0</SortType>
             <Ascending>0</Ascending>
-            <UnreadPreferred>1</UnreadPreferred>
+            <UnreadPreferred>{}</UnreadPreferred>
         </request>
-    """.format(page, qty, box_type)
+    """.format(
+        page,
+        qty,
+        box_type,
+        1 if unread_preferred else 0
+    )
 
     headers = {
         '__RequestVerificationToken': ctx.token,

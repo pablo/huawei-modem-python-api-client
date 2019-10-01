@@ -8,7 +8,7 @@ def get_connected_hosts(ctx):
     return huaweisms.api.common.get_from_url(url, ctx)
 
 
-def block_host(ctx, mac_address, hostname = None):
+def block_host(ctx, mac_address, hostname=None):
     # type: (huaweisms.api.common.ApiCtx, str, str) -> ...
     """
     Blocks/blacklists the given hosts.
