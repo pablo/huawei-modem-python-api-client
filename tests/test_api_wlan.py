@@ -11,6 +11,7 @@ import six
 import huaweisms.api.wlan
 import huaweisms.api.common
 
+
 class WlanTestCase(unittest.TestCase):
 
     @classmethod

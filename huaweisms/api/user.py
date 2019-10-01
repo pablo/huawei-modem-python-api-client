@@ -19,7 +19,7 @@ def b64_sha256(data):
     return base64.urlsafe_b64encode(hs256).decode('utf-8', 'ignore')
 
 
-def quick_login(username, password, modem_host = None):
+def quick_login(username, password, modem_host=None):
     # type: (str, str, str) -> ...
     ctx = ApiCtx(modem_host=modem_host)
     token = huaweisms.api.webserver.get_session_token_info(ctx.api_base_url)
