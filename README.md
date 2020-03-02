@@ -8,6 +8,7 @@ The library has been tested on these devices:
 * E5180
 * E8372
 * B315
+* B529s-23a
 
 Please let me know if you tested it successfully with other modems as well.
 
