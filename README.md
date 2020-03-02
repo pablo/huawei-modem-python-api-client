@@ -33,6 +33,8 @@ Please let me know if you tested it successfully with other modems as well.
     * unblock_host: unblock device on network
     * get_blocked_hosts: gets a list of blocked devices
     * is_host_blocked: checks if device is blocked
+    * switch_wlan_24ghz: allows to switch on or off the wlan 2.4Ghz module of the router
+    * switch_wlan_5ghz: allows to switch on or off the wlan 5Ghz module of the router
 * dialup:
     * connect_mobile: enables mobile (ie LTE / 4G / 3G / etc) network
     * disconnect_mobile: disables mobile network
