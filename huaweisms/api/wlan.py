@@ -89,3 +89,29 @@ def is_host_blocked(ctx, mac_address):
             if k.startswith('WifiMacFilterMac') and v.strip().lower() == mac_address.lower():
                 return True
     return False
+
+def switch_wlan_24ghz (ctx, on):
+	xml = '<?xml version = "1.0" encoding = "UTF-8"?>\n'
+	if on == False:
+		xml +=  '<request><radios><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.1.</ID><index>0</index><wifienable>0</wifienable></radio><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.2.</ID><index>1</index><wifienable>0</wifienable></radio></radios></request>'
+	else:
+		xml += '<request><radios><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.1.</ID><index>0</index><wifienable>1</wifienable></radio><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.2.</ID><index>1</index><wifienable>0</wifienable></radio></radios></request>'
+	
+	url = '{}/wlan/status-switch-settings'.format(ctx.api_base_url)
+	headers = {
+        '__RequestVerificationToken': ctx.token,
+	}
+	return huaweisms.api.common.post_to_url(url,xml,ctx,additional_headers=headers)
+
+def switch_wlan_5ghz (ctx, on):
+	xml = '<?xml version = "1.0" encoding = "UTF-8"?>\n'
+	if on == False:
+		xml +=  '<request><radios><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.1.</ID><index>0</index><wifienable>0</wifienable></radio><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.2.</ID><index>1</index><wifienable>0</wifienable></radio></radios></request>'
+	else:
+		xml += '<request><radios><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.1.</ID><index>0</index><wifienable>0</wifienable></radio><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.2.</ID><index>1</index><wifienable>1</wifienable></radio></radios></request>'
+	
+	url = '{}/wlan/status-switch-settings'.format(ctx.api_base_url)
+	headers = {
+        '__RequestVerificationToken': ctx.token,
+	}
+	return huaweisms.api.common.post_to_url(url,xml,ctx,additional_headers=headers)
