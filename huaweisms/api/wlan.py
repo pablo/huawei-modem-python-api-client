@@ -90,28 +90,39 @@ def is_host_blocked(ctx, mac_address):
                 return True
     return False
 
-def switch_wlan_24ghz (ctx, on):
-	xml = '<?xml version = "1.0" encoding = "UTF-8"?>\n'
-	if on == False:
-		xml +=  '<request><radios><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.1.</ID><index>0</index><wifienable>0</wifienable></radio><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.2.</ID><index>1</index><wifienable>0</wifienable></radio></radios></request>'
-	else:
-		xml += '<request><radios><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.1.</ID><index>0</index><wifienable>1</wifienable></radio><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.2.</ID><index>1</index><wifienable>0</wifienable></radio></radios></request>'
-	
-	url = '{}/wlan/status-switch-settings'.format(ctx.api_base_url)
-	headers = {
-        '__RequestVerificationToken': ctx.token,
-	}
-	return huaweisms.api.common.post_to_url(url,xml,ctx,additional_headers=headers)
 
-def switch_wlan_5ghz (ctx, on):
-	xml = '<?xml version = "1.0" encoding = "UTF-8"?>\n'
-	if on == False:
-		xml +=  '<request><radios><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.1.</ID><index>0</index><wifienable>0</wifienable></radio><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.2.</ID><index>1</index><wifienable>0</wifienable></radio></radios></request>'
-	else:
-		xml += '<request><radios><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.1.</ID><index>0</index><wifienable>0</wifienable></radio><radio><ID>InternetGatewayDevice.X_Config.Wifi.Radio.2.</ID><index>1</index><wifienable>1</wifienable></radio></radios></request>'
-	
-	url = '{}/wlan/status-switch-settings'.format(ctx.api_base_url)
-	headers = {
+def _switch_rf_radios(ctx, radio_1_enable, radio_2_enable):
+    url = '{}/wlan/status-switch-settings'.format(ctx.api_base_url)
+    headers = {
         '__RequestVerificationToken': ctx.token,
-	}
-	return huaweisms.api.common.post_to_url(url,xml,ctx,additional_headers=headers)
+    }
+    xml_data = """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <request>
+            <radios>
+                <radio>
+                    <ID>InternetGatewayDevice.X_Config.Wifi.Radio.1.</ID>
+                    <index>0</index>
+                    <wifienable>{radio_1_enable}</wifienable>
+                </radio>
+                <radio>
+                    <ID>InternetGatewayDevice.X_Config.Wifi.Radio.2.</ID>
+                    <index>1</index>
+                    <wifienable>{radio_2_enable}</wifienable>
+                </radio>
+            </radios>
+        </request>
+    """.format(radio_1_enable=radio_1_enable, radio_2_enable=radio_2_enable)
+    return huaweisms.api.common.post_to_url(url, xml_data, ctx, additional_headers=headers)
+
+
+def switch_wlan_24ghz(ctx, on):
+    wlan_2_4ghz_radio = 0 if on is False else 1
+    wlan_5ghz_radio = 0
+    return _switch_rf_radios(ctx, wlan_2_4ghz_radio, wlan_5ghz_radio)
+
+
+def switch_wlan_5ghz(ctx, on):
+    wlan_2_4ghz_radio = 0
+    wlan_5ghz_radio = 0 if on is False else 1
+    return _switch_rf_radios(ctx, wlan_2_4ghz_radio, wlan_5ghz_radio)
