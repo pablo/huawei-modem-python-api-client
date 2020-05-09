@@ -23,6 +23,7 @@ Please let me know if you tested it successfully with other modems as well.
    * send_sms: sends an SMS through device's modem
    * delete_sms: deletes an sms from one of their boxes
    * sms_count: get the sms count on each box
+   * sms_set_read: set the sms status to read
 * ussd
    * status: get status of ussd. This will tell you if there are ussd messages available to read
    * send: sends a ussd message
