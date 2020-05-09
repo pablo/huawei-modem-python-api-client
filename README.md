@@ -45,7 +45,9 @@ Please let me know if you tested it successfully with other modems as well.
 
 ### Prerequisites
 
-Only [`requests`](https://github.com/requests/requests) library (and its dependencies) is required.
+[`requests`](https://github.com/requests/requests) library (and its dependencies) is required.
+[`six`](https://pypi.org/project/six/) library (and its dependencies for Python 2 and 3 compatibility)
+[`typing`](https://docs.python.org/3/library/typing.html) library (support for type hints)
 
 This is `requirements.txt` content:
 
@@ -55,6 +57,8 @@ chardet==3.0.4
 idna>=2.6
 requests>=2.0.0
 urllib3>=1.22
+typing>=3.7.4
+six>=1.12.0
 ```
 
 ### Installing
