@@ -119,5 +119,3 @@ def sms_set_read(ctx, index):
     }
     url = "{}/sms/set-read".format(ctx.api_base_url)
     return post_to_url(url, xml_data, ctx, headers)
-
-
