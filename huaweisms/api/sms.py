@@ -101,3 +101,23 @@ def sms_count(ctx):
     # type: (ApiCtx) -> ...
     url = "{}/sms/sms-count".format(ctx.api_base_url)
     return get_from_url(url, ctx)
+
+
+def sms_set_read(ctx, index):
+    # type: (ApiCtx) -> ...
+
+    xml_data = """
+        <?xml version:"1.0" encoding="UTF-8"?>
+        <request>
+            <Index>{}</Index>
+        </request>
+    """.format(index)
+
+    headers = {
+        '__RequestVerificationToken': ctx.token,
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+    url = "{}/sms/set-read".format(ctx.api_base_url)
+    return post_to_url(url, xml_data, ctx, headers)
+
+
