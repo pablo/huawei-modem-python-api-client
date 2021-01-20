@@ -103,6 +103,7 @@ def post_to_url(url, data, ctx=None, additional_headers=None):
     if additional_headers:
         headers.update(additional_headers)
 
+    data = ''.join(line.strip() for line in data.split('\n'))
     r = requests.post(url, data=data, headers=headers, cookies=cookies)
     check_response_headers(r, ctx)
     return api_response(r)
