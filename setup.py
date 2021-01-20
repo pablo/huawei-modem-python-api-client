@@ -1,6 +1,6 @@
 from setuptools import setup
 
-version = '1.0.10'
+version = '1.0.11'
 
 with open('requirements.txt') as fd:
     requirements = [line.strip() for line in fd if line.strip()]
@@ -16,7 +16,7 @@ testing_requirements = [
 linting_requirements = [
     'flake8',
     'pylint',
-    'bandit',
+    'bandit<1.7',
 ]
 
 with open('README.md') as fd:
@@ -64,6 +64,7 @@ setup_args = {
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'License :: OSI Approved :: MIT License',
         'Operating System :: MacOS',
         'Operating System :: POSIX :: Linux',
