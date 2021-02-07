@@ -43,7 +43,7 @@ jobs:
     - name: Test
       run: |
         pip install '.[testing]'
-        pytest -xv --cov huaweisms --cov-report term-missing tests
+        pytest -xv --cov-report=xml --cov-report=term-missing --cov=huaweisms tests
 
     - name: Upload coverage report to Codecov
       uses: codecov/codecov-action@v1
