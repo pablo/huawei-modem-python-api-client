@@ -1,8 +1,8 @@
 [![Build Status](https://github.com/dopstar/huawei-modem-python-api-client/workflows/build/badge.svg?branch=master)](https://github.com/dopstar/huawei-modem-python-api-client/actions?query=workflow%3Abuild)
+[![codecov](https://codecov.io/gh/dopstar/huawei-modem-python-api-client/branch/master/graph/badge.svg)](https://codecov.io/gh/dopstar/huawei-modem-python-api-client)
 [![Python Version](https://img.shields.io/pypi/pyversions/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client)
 [![PyPI Status](https://img.shields.io/pypi/v/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client)
-[![Code Coverage](https://img.shields.io/coveralls/github/dopstar/huawei-modem-python-api-client.svg)](https://coveralls.io/github/dopstar/huawei-modem-python-api-client)
 [![Licence](https://img.shields.io/github/license/pablo/huawei-modem-python-api-client.svg)](https://raw.githubusercontent.com/pablo/huawei-modem-python-api-client/master/LICENSE.md)
 
 # Python HTTP API client for Huawei Modems
