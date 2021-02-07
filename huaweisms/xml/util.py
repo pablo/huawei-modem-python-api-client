@@ -1,7 +1,8 @@
-import six
 from typing import Union
 from xml.dom import minidom
-from xml.dom.minidom import Element, Document
+from xml.dom.minidom import Document, Element
+
+import six
 
 
 def get_element_text(elem):
@@ -64,7 +65,7 @@ def parse_xml_string(xml_string):
 def dict_to_xml(data):
     # type: (dict) -> str
     if not data:
-        return ''
+        return ""
 
     def add_children(doc, parent, input_data):
         if isinstance(input_data, dict):
@@ -84,4 +85,4 @@ def dict_to_xml(data):
     root = document.createElement(key)
     document.appendChild(root)
     add_children(document, root, data[key])
-    return document.toxml(encoding='utf8')
+    return document.toxml(encoding="utf8")

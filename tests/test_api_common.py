@@ -27,8 +27,8 @@ class ApiCommonTestCase(unittest.TestCase):
         ctx.session_id = fake_id
         cookies = huaweisms.api.common.build_cookies(ctx)
         self.assertIsInstance(cookies, dict)
-        self.assertDictEqual(cookies, {'SessionID': fake_id})
+        self.assertDictEqual(cookies, {"SessionID": fake_id})
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

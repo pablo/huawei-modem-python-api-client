@@ -1,8 +1,4 @@
-from huaweisms.api.common import (
-    post_to_url,
-    get_from_url,
-    ApiCtx,
-)
+from huaweisms.api.common import ApiCtx, get_from_url, post_to_url
 
 
 def information(ctx):
@@ -23,10 +19,12 @@ def reboot(ctx):
     Reboots the modem.
     """
 
-    url = '{}/device/control'.format(ctx.api_base_url)
+    url = "{}/device/control".format(ctx.api_base_url)
     headers = {
-        '__RequestVerificationToken': ctx.token,
+        "__RequestVerificationToken": ctx.token,
     }
 
-    payload = '<?xml version: "1.0" encoding="UTF-8"?><request><Control>1</Control></request>'
+    payload = (
+        '<?xml version: "1.0" encoding="UTF-8"?><request><Control>1</Control></request>'
+    )
     return post_to_url(url, payload, ctx, additional_headers=headers)
