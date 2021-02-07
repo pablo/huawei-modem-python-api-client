@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/dopstar/huawei-modem-api-client/workflows/build/badge.svg?branch=master)](https://github.com/dopstar/huawei-modem-api-client/actions?query=workflow%3Abuild)
+[![Build Status](https://github.com/dopstar/huawei-modem-python-api-client/workflows/build/badge.svg?branch=master)](https://github.com/dopstar/huawei-modem-python-api-client/actions?query=workflow%3Abuild)
 [![Python Version](https://img.shields.io/pypi/pyversions/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client)
 [![PyPI Status](https://img.shields.io/pypi/v/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/huawei-modem-api-client.svg)](https://pypi.python.org/pypi/huawei-modem-api-client)
