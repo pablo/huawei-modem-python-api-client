@@ -1,7 +1,7 @@
 import logging
 
-from huaweisms.api.config import MODEM_HOST
 from huaweisms.api.common import get_from_url
+from huaweisms.api.config import MODEM_HOST
 
 
 logger = logging.getLogger(__name__)
@@ -17,10 +17,10 @@ def get_session_token_info(base_url=None):
     """
     if base_url is None:
         logger.warning(
-            'calling %s.get_session_token_info without base_url argument is deprecated',
-            __name__
+            "calling %s.get_session_token_info without base_url argument is deprecated",
+            __name__,
         )
-        base_url = 'http://{}/api'.format(MODEM_HOST)
+        base_url = "http://{}/api".format(MODEM_HOST)
 
     url = "{}/webserver/SesTokInfo".format(base_url)
     return get_from_url(url, timeout=30)

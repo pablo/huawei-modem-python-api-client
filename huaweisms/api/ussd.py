@@ -1,4 +1,4 @@
-from huaweisms.api.common import post_to_url, ApiCtx, get_from_url
+from huaweisms.api.common import ApiCtx, get_from_url, post_to_url
 
 
 def status(ctx):
@@ -22,11 +22,13 @@ def send(ctx, msg):
            <codeType>CodeType</codeType>
            <timeout></timeout>
         </request>
-    """.format(msg)
+    """.format(
+        msg
+    )
 
     headers = {
-        '__RequestVerificationToken': ctx.token,
-        'X-Requested-With': 'XMLHttpRequest'
+        "__RequestVerificationToken": ctx.token,
+        "X-Requested-With": "XMLHttpRequest",
     }
     url = "{}/ussd/send".format(ctx.api_base_url)
     r = post_to_url(url, xml_data, ctx, headers)

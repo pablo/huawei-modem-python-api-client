@@ -1,6 +1,6 @@
 import sys
 
-from huaweisms.api import user, sms
+from huaweisms.api import sms, user
 from huaweisms.api.common import ApiCtx
 
 
@@ -16,17 +16,17 @@ def get_session():
 def valid_context(ctx):
     # type: (ApiCtx) -> ...
     sl = user.state_login(ctx)
-    if sl['type'] == 'response' and sl['response']['State'] != -1:
+    if sl["type"] == "response" and sl["response"]["State"] != -1:
         return True
     return False
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # USAGE: python3 sendmsg.py <password> <number> <message>
     # Arguments are <program> <password> <to_phone> <message>
     if len(sys.argv) != 4:
-        print('Incomplete arguments ', len(sys.argv) - 1, 'received, 3 required')
-        print('USAGE:', sys.argv[0], '"admin password" "phone number" "message"')
+        print("Incomplete arguments ", len(sys.argv) - 1, "received, 3 required")
+        print("USAGE:", sys.argv[0], '"admin password" "phone number" "message"')
         exit()
 
     PASSWORD = sys.argv[1]
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     ctx = get_session()
     sent = sms.send_sms(ctx, PHONE_NUMBER, MESSAGE)
 
-    if sent['type'] == "response" and sent['response'] == "OK":
+    if sent["type"] == "response" and sent["response"] == "OK":
         print("Message sent.")
     else:
         print("Message error")

@@ -1,6 +1,6 @@
 from pprint import pprint
 
-from huaweisms.api import monitoring, user, sms
+from huaweisms.api import monitoring, sms, user
 from huaweisms.api.common import ApiCtx
 
 
@@ -18,7 +18,7 @@ def get_session():
 def valid_context(ctx):
     # type: (ApiCtx) -> bool
     sl = user.state_login(ctx)
-    if sl['type'] == 'response' and sl['response']['State'] != -1:
+    if sl["type"] == "response" and sl["response"]["State"] != -1:
         return True
     return False
 
