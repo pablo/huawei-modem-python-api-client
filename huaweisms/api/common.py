@@ -12,12 +12,19 @@ logger = logging.getLogger(__name__)
 
 
 class ApiCtx:
-    def __init__(self, modem_host=None):
+    def __init__(self, modem_host=None, uri_scheme="http", verify=True):
         # type: (...) -> None
         self.session_id = None
         self.logged_in = False
         self.login_token = None
         self.tokens = []
+        self.verify = bool(verify)
+
+        if uri_scheme and uri_scheme.lower() in ("http", "https"):
+            self.uri_scheme = uri_scheme.lower()
+        else:
+            self.uri_scheme = "http"
+
         self.__modem_host = modem_host if modem_host else MODEM_HOST
 
     def __unicode__(self):
@@ -31,7 +38,7 @@ class ApiCtx:
 
     @property
     def api_base_url(self):
-        return "http://{}/api".format(self.__modem_host)
+        return "{}://{}/api".format(self.uri_scheme, self.__modem_host)
 
     @property
     def token(self):
@@ -95,12 +102,13 @@ def post_to_url(url, data, ctx=None, additional_headers=None):
     # type: (str, str, ApiCtx, dict) -> dict
     cookies = build_cookies(ctx)
     headers = common_headers()
+    verify = ctx and ctx.verify
 
     if additional_headers:
         headers.update(additional_headers)
 
     data = "".join(line.strip() for line in data.split("\n"))
-    r = requests.post(url, data=data, headers=headers, cookies=cookies)
+    r = requests.post(url, data=data, headers=headers, cookies=cookies, verify=verify)
     check_response_headers(r, ctx)
     return api_response(r)
 
@@ -109,11 +117,12 @@ def get_from_url(url, ctx=None, additional_headers=None, timeout=None):
     # type: (str, ApiCtx, dict, int) -> dict
     cookies = build_cookies(ctx)
     headers = common_headers()
+    verify = ctx and ctx.verify
 
     if additional_headers:
         headers.update(additional_headers)
 
-    r = requests.get(url, headers=headers, cookies=cookies, timeout=timeout)
+    r = requests.get(url, headers=headers, cookies=cookies, timeout=timeout, verify=verify)
     check_response_headers(r, ctx)
     return api_response(r)
 

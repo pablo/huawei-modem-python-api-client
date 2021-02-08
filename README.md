@@ -104,6 +104,33 @@ print(ctx)
 #output: <ApiCtx modem_host=10.11.12.13>
 ```
 
+### HTTPS Examples
+
+When the router uses HTTPS instead of HTTP, you can pass the `uri_scheme` when creating the context instance which
+becomes used on subsequent api calls that use the same context.
+```python
+import huaweisms.api.user
+ctx = huaweisms.api.user.quick_login(
+  'username',
+  'password',
+  modem_host='192.168.12.13',
+  uri_scheme='https'
+)
+```
+
+If the router that uses HTTPS uses self-signed certificates, there will be SSL errors. You can ignore certificate 
+validation/verification as follows:
+```python
+import huaweisms.api.user
+ctx = huaweisms.api.user.quick_login(
+  'username',
+  'password',
+  modem_host='192.168.12.13',
+  uri_scheme='https',
+  verify=False
+)
+```
+
 ## Built With
 
 * [requests](https://github.com/requests/requests) - Python HTTP Requests for Humans™
