@@ -1,26 +1,19 @@
 import logging
 
-from huaweisms.api.common import get_from_url
-from huaweisms.api.config import MODEM_HOST
+from huaweisms.api.common import ApiCtx, get_from_url
 
 
 logger = logging.getLogger(__name__)
 
 
-def get_session_token_info(base_url=None):
-    # type: (str) -> ...
+def get_session_token_info(ctx):
+    # type: (ApiCtx) -> ...
     """
     Get session token information
 
-    :param base_url: base url for the modem api
+    :param ctx: ApiCtx instance
     :return:
     """
-    if base_url is None:
-        logger.warning(
-            "calling %s.get_session_token_info without base_url argument is deprecated",
-            __name__,
-        )
-        base_url = "http://{}/api".format(MODEM_HOST)
 
-    url = "{}/webserver/SesTokInfo".format(base_url)
-    return get_from_url(url, timeout=30)
+    url = "{}/webserver/SesTokInfo".format(ctx.api_base_url)
+    return get_from_url(url, ctx=ctx, timeout=30)
