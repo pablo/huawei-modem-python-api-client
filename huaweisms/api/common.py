@@ -98,7 +98,7 @@ def check_response_headers(resp, ctx):
         ctx.session_id = resp.cookies["SessionID"]
 
 
-def post_to_url(url, data, ctx=None, additional_headers=None):
+def post_to_url(url, data, ctx=None, additional_headers=None, timeout=30):
     # type: (str, str, ApiCtx, dict) -> dict
     cookies = build_cookies(ctx)
     headers = common_headers()
@@ -108,12 +108,12 @@ def post_to_url(url, data, ctx=None, additional_headers=None):
         headers.update(additional_headers)
 
     data = "".join(line.strip() for line in data.split("\n"))
-    r = requests.post(url, data=data, headers=headers, cookies=cookies, verify=verify)
+    r = requests.post(url, data=data, headers=headers, cookies=cookies, timeout=timeout, verify=verify)
     check_response_headers(r, ctx)
     return api_response(r)
 
 
-def get_from_url(url, ctx=None, additional_headers=None, timeout=None):
+def get_from_url(url, ctx=None, additional_headers=None, timeout=30):
     # type: (str, ApiCtx, dict, int) -> dict
     cookies = build_cookies(ctx)
     headers = common_headers()
