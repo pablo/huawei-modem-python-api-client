@@ -14,6 +14,7 @@ The library has been tested on these devices:
 * E8372
 * B315
 * B529s-23a
+* H122-373 (HUAWEI 5G CPE Pro 2 locoked to the UK Network Three)
 
 Please let me know if you tested it successfully with other modems as well.
 
