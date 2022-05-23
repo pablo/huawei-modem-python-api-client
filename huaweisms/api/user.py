@@ -63,3 +63,15 @@ def state_login(ctx):
     # type: (ApiCtx) -> ...
     url = "{}/user/state-login".format(ctx.api_base_url)
     return get_from_url(url, ctx)
+
+def logout(ctx):
+    url = "{}/user/logout".format(ctx.api_base_url)
+    headers = {
+        "__RequestVerificationToken": ctx.token,
+    }
+
+    payload = (
+        '<?xml version: "1.0" encoding="UTF-8"?><request><Logout>1</Logout></request>'
+    )
+    
+    return post_to_url(url, payload, ctx, additional_headers=headers)
