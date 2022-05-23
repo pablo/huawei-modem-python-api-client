@@ -24,6 +24,7 @@ Please let me know if you tested it successfully with other modems as well.
    * get_session_token_info: gets a session token to use
 * user
    * login: creates a new session on the HTTP API
+   * logout: deletes current session on the HTTP API
 * sms
    * get_sms: get information from boxes: inbox, outbox
    * send_sms: sends an SMS through device's modem
