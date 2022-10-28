@@ -108,7 +108,7 @@ def post_to_url(url, data, ctx=None, additional_headers=None, timeout=30):
         headers.update(additional_headers)
 
     data = "".join(line.strip() for line in data.split("\n"))
-    r = requests.post(url, data=data, headers=headers, cookies=cookies, timeout=timeout, verify=verify)
+    r = requests.post(url, data=data.encode(), headers=headers, cookies=cookies, timeout=timeout, verify=verify)
     check_response_headers(r, ctx)
     return api_response(r)
 
