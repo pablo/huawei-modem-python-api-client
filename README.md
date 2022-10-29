@@ -59,13 +59,9 @@ Please let me know if you tested it successfully with other modems as well.
 This is `requirements.txt` content:
 
 ```
-certifi==2018.11.29
-chardet==3.0.4
-idna>=2.6
-requests>=2.0.0
-urllib3>=1.22
-typing>=3.7.4
-six>=1.12.0
+requests>=2.25.1
+six>=1.15.0
+typing>=3.7.4.3
 ```
 
 ### Installing
